@@ -148,10 +148,8 @@ async function handleStartAudioProcessing(streamId) {
     // with the constraint that includes the chromeMediaSourceId
     mediaStream = await navigator.mediaDevices.getUserMedia({
       audio: {
-        mandatory: {
-          chromeMediaSource: 'tab',
-          chromeMediaSourceId: streamId
-        }
+        chromeMediaSource: 'tab',
+        chromeMediaSourceId: streamId
       }
     });
 

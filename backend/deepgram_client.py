@@ -66,7 +66,9 @@ class DeepgramTranscriber:
             )
             
             # Create live transcription connection
-            connection = self.client.listen.asyncwebsocket.v("1")
+            # Using API version 1 (stable) - see Deepgram docs for versioning
+            DEEPGRAM_API_VERSION = "1"
+            connection = self.client.listen.asyncwebsocket.v(DEEPGRAM_API_VERSION)
             
             # Set up event handlers
             async def on_message(self_inner, result, **kwargs):
