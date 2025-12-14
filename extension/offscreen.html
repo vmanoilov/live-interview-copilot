@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Audio Processing Context</title>
+</head>
+<body>
+  <!-- 
+    Offscreen Document for Manifest V3 Audio Processing
+    
+    This hidden document provides a context with full Web API access:
+    - AudioContext for audio manipulation
+    - MediaRecorder for encoding audio chunks
+    - WebSocket for streaming to backend
+    
+    Service workers cannot use these APIs directly.
+  -->
+  <script src="offscreen.js"></script>
+</body>
+</html>
