@@ -58,12 +58,55 @@ backend/
 
 ### Backend Setup
 
+#### Option 1: Automated Setup (Recommended)
+
+The backend now features **automated setup** that runs when you start the server for the first time:
+
 1. **Navigate to backend directory**:
    ```bash
    cd backend
    ```
 
-2. **Create virtual environment**:
+2. **Start the backend server**:
+   ```bash
+   python main.py
+   ```
+
+   On first run, the server will automatically:
+   - Check Python version (requires 3.9+)
+   - Install all required dependencies from `requirements.txt`
+   - Create a `.env` file from `.env.example`
+   - Validate the configuration
+
+3. **Configure API keys**:
+   After the automated setup completes, edit the `.env` file and add your API keys:
+   ```env
+   DEEPGRAM_API_KEY=your_deepgram_api_key_here
+   GROQ_API_KEY=your_groq_api_key_here
+   ```
+
+4. **Restart the server**:
+   ```bash
+   python main.py
+   ```
+
+   The server will start on `http://localhost:8000`
+
+#### Option 2: Manual Setup (Alternative)
+
+If you prefer manual control or the automated setup doesn't work:
+
+1. **Navigate to backend directory**:
+   ```bash
+   cd backend
+   ```
+
+2. **Run setup script** (Linux/Mac):
+   ```bash
+   ./setup.sh
+   ```
+
+   Or manually create virtual environment:
    ```bash
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
@@ -95,6 +138,13 @@ backend/
    ```
 
    The server will start on `http://localhost:8000`
+
+#### Setup Behavior
+
+- **First Run**: Automated setup runs automatically when dependencies are missing
+- **Subsequent Runs**: Setup is skipped if already complete (tracked via `.setup_complete` flag)
+- **Manual Re-setup**: Delete `backend/.setup_complete` to trigger setup again
+- **Configuration Check**: API keys are validated on every startup
 
 ### Chrome Extension Setup
 

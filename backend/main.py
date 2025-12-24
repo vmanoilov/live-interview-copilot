@@ -20,6 +20,7 @@ import json
 import os
 from typing import Optional, List
 import logging
+import sys
 
 # Configure logging
 logging.basicConfig(
@@ -27,6 +28,25 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+# Auto-setup: Check if backend setup is complete and run setup if needed
+try:
+    from setup import is_setup_done, perform_backend_setup
+    
+    if not is_setup_done():
+        logger.info("Backend setup not complete. Running automated setup...")
+        setup_success = perform_backend_setup()
+        
+        if not setup_success:
+            logger.error("Automated setup failed. Please run setup manually or check the logs.")
+            sys.exit(1)
+        
+        logger.info("Automated setup completed. Continuing with server startup...")
+    else:
+        logger.info("Backend setup verified. Proceeding with server startup...")
+except Exception as e:
+    logger.warning(f"Setup check failed: {e}. Continuing with startup...")
+    # Continue even if setup check fails - let the normal startup handle missing dependencies
 
 # Import our custom clients
 from deepgram_client import DeepgramTranscriber
