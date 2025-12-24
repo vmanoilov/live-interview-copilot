@@ -47,3 +47,4 @@ node_modules/
 extension/*.crx
 extension/*.pem
 extension/.DS_Store
+extension/dist/

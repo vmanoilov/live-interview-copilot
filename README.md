@@ -148,17 +148,42 @@ If you prefer manual control or the automated setup doesn't work:
 
 ### Chrome Extension Setup
 
+#### Option 1: Install Packaged Extension (Recommended)
+
+1. **Package the extension**:
+   ```bash
+   cd extension
+   bash package.sh
+   ```
+   
+   This creates a distributable ZIP file in `extension/dist/live-interview-copilot-v1.0.0.zip`
+
+2. **Install the extension**:
+   - Open Chrome and navigate to `chrome://extensions/`
+   - Enable "Developer mode" (toggle in top-right)
+   - Extract the ZIP file to a permanent location
+   - Click "Load unpacked" and select the extracted folder
+   - Or drag and drop the extracted folder onto the extensions page
+
+3. **Verify installation**:
+   - You should see "Live Interview Copilot" in your extensions list
+   - Pin it to your toolbar for easy access
+
+#### Option 2: Development Mode (For Development)
+
 1. **Open Chrome Extensions page**:
    - Navigate to `chrome://extensions/`
    - Enable "Developer mode" (toggle in top-right)
 
 2. **Load the extension**:
    - Click "Load unpacked"
-   - Select the `extension` folder from this project
+   - Select the `extension` folder directly from this project
 
 3. **Verify installation**:
    - You should see "Live Interview Copilot" in your extensions list
    - Pin it to your toolbar for easy access
+
+**Note**: For production distribution, publish the extension to the Chrome Web Store for automatic updates and enhanced user trust.
 
 ## 📖 Usage
 
