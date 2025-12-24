@@ -10,6 +10,7 @@ import sys
 import subprocess
 import shutil
 from pathlib import Path
+from typing import Tuple, List
 import logging
 
 logger = logging.getLogger(__name__)
@@ -69,7 +70,7 @@ class BackendSetup:
             True if version is acceptable
         """
         version_info = sys.version_info
-        if version_info.major >= 3 and version_info.minor >= 9:
+        if version_info >= (3, 9):
             logger.info(f"Python version {version_info.major}.{version_info.minor}.{version_info.micro} OK")
             return True
         else:
@@ -152,7 +153,7 @@ GROQ_API_KEY=your_groq_api_key_here
             f.write(default_content)
         logger.info("Created default .env file")
     
-    def validate_configuration(self) -> tuple[bool, list[str]]:
+    def validate_configuration(self) -> Tuple[bool, List[str]]:
         """
         Validate that required configuration is set
         
@@ -186,7 +187,7 @@ GROQ_API_KEY=your_groq_api_key_here
         """Mark setup as complete by creating flag file"""
         try:
             with open(self.setup_flag_file, 'w') as f:
-                f.write(f"Setup completed at: {Path(__file__).parent}\n")
+                f.write(f"Setup completed at: {self.backend_dir}\n")
             logger.info("Setup marked as complete")
         except Exception as e:
             logger.error(f"Failed to create setup flag file: {e}")
