@@ -156,14 +156,14 @@ If you prefer manual control or the automated setup doesn't work:
    bash package.sh
    ```
    
-   This creates a distributable ZIP file in `extension/dist/live-interview-copilot-v1.0.0.zip`
+   This creates a distributable ZIP file in `extension/dist/live-interview-copilot-vX.Y.Z.zip`
 
 2. **Install the extension**:
    - Open Chrome and navigate to `chrome://extensions/`
    - Enable "Developer mode" (toggle in top-right)
-   - Extract the ZIP file to a permanent location
+   - Extract the ZIP file to a permanent location on your computer
    - Click "Load unpacked" and select the extracted folder
-   - Or drag and drop the extracted folder onto the extensions page
+   - The extension will now be installed and ready to use
 
 3. **Verify installation**:
    - You should see "Live Interview Copilot" in your extensions list

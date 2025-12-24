@@ -10,7 +10,7 @@ cd "$SCRIPT_DIR"
 
 # Extension name and version from manifest.json
 EXTENSION_NAME="live-interview-copilot"
-VERSION=$(grep -oP '"version":\s*"\K[^"]+' manifest.json)
+VERSION=$(grep '"version"' manifest.json | sed 's/.*"version":[[:space:]]*"\([^"]*\)".*/\1/')
 
 # Output directory and filename
 OUTPUT_DIR="$SCRIPT_DIR/dist"
@@ -63,7 +63,7 @@ done
 
 # Create ZIP package
 cd "$TEMP_DIR"
-zip -r "$OUTPUT_DIR/$OUTPUT_FILE" . > /dev/null
+zip -qr "$OUTPUT_DIR/$OUTPUT_FILE" .
 
 echo
 echo "✓ Package created successfully!"
