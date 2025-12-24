@@ -58,12 +58,55 @@ backend/
 
 ### Backend Setup
 
+#### Option 1: Automated Setup (Recommended)
+
+The backend now features **automated setup** that runs when you start the server for the first time:
+
 1. **Navigate to backend directory**:
    ```bash
    cd backend
    ```
 
-2. **Create virtual environment**:
+2. **Start the backend server**:
+   ```bash
+   python main.py
+   ```
+
+   On first run, the server will automatically:
+   - Check Python version (requires 3.9+)
+   - Install all required dependencies from `requirements.txt`
+   - Create a `.env` file from `.env.example`
+   - Validate the configuration
+
+3. **Configure API keys**:
+   After the automated setup completes, edit the `.env` file and add your API keys:
+   ```env
+   DEEPGRAM_API_KEY=your_deepgram_api_key_here
+   GROQ_API_KEY=your_groq_api_key_here
+   ```
+
+4. **Restart the server**:
+   ```bash
+   python main.py
+   ```
+
+   The server will start on `http://localhost:8000`
+
+#### Option 2: Manual Setup (Alternative)
+
+If you prefer manual control or the automated setup doesn't work:
+
+1. **Navigate to backend directory**:
+   ```bash
+   cd backend
+   ```
+
+2. **Run setup script** (Linux/Mac):
+   ```bash
+   ./setup.sh
+   ```
+
+   Or manually create virtual environment:
    ```bash
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
@@ -96,7 +139,37 @@ backend/
 
    The server will start on `http://localhost:8000`
 
+#### Setup Behavior
+
+- **First Run**: Automated setup runs automatically when dependencies are missing
+- **Subsequent Runs**: Setup is skipped if already complete (tracked via `.setup_complete` flag)
+- **Manual Re-setup**: Delete `backend/.setup_complete` to trigger setup again
+- **Configuration Check**: API keys are validated on every startup
+
 ### Chrome Extension Setup
+
+#### Option 1: Install Packaged Extension (Recommended)
+
+1. **Package the extension**:
+   ```bash
+   cd extension
+   bash package.sh
+   ```
+   
+   This creates a distributable ZIP file in `extension/dist/live-interview-copilot-vX.Y.Z.zip`
+
+2. **Install the extension**:
+   - Open Chrome and navigate to `chrome://extensions/`
+   - Enable "Developer mode" (toggle in top-right)
+   - Extract the ZIP file to a permanent location on your computer
+   - Click "Load unpacked" and select the extracted folder
+   - The extension will now be installed and ready to use
+
+3. **Verify installation**:
+   - You should see "Live Interview Copilot" in your extensions list
+   - Pin it to your toolbar for easy access
+
+#### Option 2: Development Mode (For Development)
 
 1. **Open Chrome Extensions page**:
    - Navigate to `chrome://extensions/`
@@ -104,11 +177,13 @@ backend/
 
 2. **Load the extension**:
    - Click "Load unpacked"
-   - Select the `extension` folder from this project
+   - Select the `extension` folder directly from this project
 
 3. **Verify installation**:
    - You should see "Live Interview Copilot" in your extensions list
    - Pin it to your toolbar for easy access
+
+**Note**: For production distribution, publish the extension to the Chrome Web Store for automatic updates and enhanced user trust.
 
 ## 📖 Usage
 
