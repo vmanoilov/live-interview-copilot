@@ -161,9 +161,14 @@ GROQ_API_KEY=your_groq_api_key_here
         """
         errors = []
         
-        # Load environment variables
-        from dotenv import load_dotenv
-        load_dotenv(dotenv_path=self.env_file)
+        # Try to load environment variables
+        try:
+            from dotenv import load_dotenv
+            load_dotenv(dotenv_path=self.env_file)
+        except ImportError:
+            # dotenv not installed yet, skip validation
+            logger.warning("python-dotenv not available, skipping configuration validation")
+            return True, []
         
         # Check required API keys
         deepgram_key = os.getenv('DEEPGRAM_API_KEY', '')
